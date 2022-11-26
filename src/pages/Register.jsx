@@ -23,7 +23,7 @@ export default function Signin() {
   const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: "https://samuelbusayo.netlify.app/verify",
+    url: " https://signature-3ccc2.web.app/verify",
     // This must be true.
     handleCodeInApp: true,
     iOS: {
@@ -34,7 +34,7 @@ export default function Signin() {
       installApp: true,
       minimumVersion: "12",
     },
-  //  dynamicLinkDomain: "https://samuelbusayo.netlify.app",
+    dynamicLinkDomain: " https://signature-3ccc2.web.app",
   };
   const handleEmailVerify = () => {
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
@@ -57,7 +57,12 @@ export default function Signin() {
       return;
     }
     setIsLoading(true);
-   handleEmailVerify().then(()=>{
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      .then(() => {
+        window.localStorage.setItem("emailForSignIn", email);
+        // ...
+      })
+     .then(()=>{
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
