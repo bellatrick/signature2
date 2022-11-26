@@ -34,7 +34,7 @@ export default function Signin() {
       installApp: true,
       minimumVersion: "12",
     },
-    dynamicLinkDomain: " https://signature-3ccc2.web.app",
+    dynamicLinkDomain: "signature-3ccc2.web.app",
   };
   const handleEmailVerify = () => {
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
@@ -57,27 +57,22 @@ export default function Signin() {
       return;
     }
     setIsLoading(true);
-    sendSignInLinkToEmail(auth, email, actionCodeSettings)
-      .then(() => {
-        window.localStorage.setItem("emailForSignIn", email);
-        // ...
-      })
-     .then(()=>{
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
+   handleEmailVerify()
+
+    // createUserWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   // Signed in
    
-      const user = userCredential.user;
-      console.log(user);
-      setIsLoading(false);
-      toast.success("You have been successfully logged in");
-      navigate("/");
-    })
-    .catch((error) => {
-      toast.error(error.message);
-      setIsLoading(false);
-    });
-   }) 
+    //   const user = userCredential.user;
+    //   console.log(user);
+    //   setIsLoading(false);
+    //   toast.success("You have been successfully logged in");
+    //   navigate("/");
+    // })
+    // .catch((error) => {
+    //   toast.error(error.message);
+    //   setIsLoading(false);
+    // });
   };
   return (
     <p className="bg-primary text-white h-screen">
